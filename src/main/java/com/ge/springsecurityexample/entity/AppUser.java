@@ -1,18 +1,18 @@
 package com.ge.springsecurityexample.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Collection;
-import java.util.Collections;
+import javax.persistence.*;
+import java.util.Set;
 
+@Component
+@Table(name = "app_user")
 @Entity
-public class AppUser implements UserDetails {
+public class AppUser {
+
+    public String getPassword() {
+        return password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,43 +22,8 @@ public class AppUser implements UserDetails {
 
     private String password;
 
-    private String role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
+    @ManyToMany
+    private Set<UserRole> userRoles;
 
     public Long getId() {
         return id;
@@ -80,11 +45,11 @@ public class AppUser implements UserDetails {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExampleController {
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "Ge my hero";
     }
 
     @GetMapping("/hello/u")
-    public String helloUser(){
+    public String helloUser() {
         return "Ge my hero, user";
     }
 
     @GetMapping("/hello/a")
-    public String helloAdmin(){
+    public String helloAdmin() {
         return "Ge my hero, admin";
     }
 
