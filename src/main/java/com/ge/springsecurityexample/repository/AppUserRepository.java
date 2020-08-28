@@ -17,6 +17,6 @@ public interface AppUserRepository extends CrudRepository<AppUser, Long> {
     AppUserDto findAppUserDtoByName(String name);
 
 
-    @Query("SELECT distinct au from AppUser au join fetch au.userRoles where au.name= ?1")
+    @Query("SELECT distinct au from AppUser au join fetch au.userRoles where au.name= :name")
     List<AppUser> findAppUserDtoByName2(String name);
 }
