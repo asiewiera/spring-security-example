@@ -23,11 +23,22 @@ public class AppUserDto implements UserDetails {
 
     private Set<UserRole> userRoles;
 
+    public AppUserDto() {
+    }
+
     public AppUserDto(AppUser appUser) {
         this.id = appUser.getId();
         this.name = appUser.getName();
         this.password = appUser.getPassword();
         this.userRoles = appUser.getUserRoles();
+    }
+
+
+    public AppUserDto(Long id, String name, String password, Set<UserRole> userRoles) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.userRoles = userRoles;
     }
 
     @Override

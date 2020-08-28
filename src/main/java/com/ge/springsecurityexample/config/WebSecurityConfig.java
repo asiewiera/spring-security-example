@@ -72,26 +72,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         userRole = new UserRole();
         userRole.setName("ROLE_ADMIN");
         userRoles.add(userRole);
-        userRole = new UserRole();
-        userRole.setName("ROLE_TESTER");
-        userRoles.add(userRole);
         userRoleRepository.saveAll(userRoles);
+
 
         AppUser appUser = new AppUser();
         appUser.setName("user2");
         appUser.setPassword(getPasswordEncoder().encode("user2"));
-        Iterable<UserRole> userRolesAll = userRoleRepository.findAll();
+/*        Iterable<UserRole> userRolesAll = userRoleRepository.findAll();
         userRoles = StreamSupport.stream(userRolesAll.spliterator(), true)
                 .filter(e -> e.getName().matches("^(ROLE_USER|ROLE_TESTER)$"))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
         appUser.setUserRoles(userRoles);
         appUserRepository.save(appUser);
+
+/*        userRoles = new HashSet<>();
+        userRole = new UserRole();
+        userRole.setName("ROLE_USER");
+        userRoles.add(userRole);
+        userRole = new UserRole();
+        userRole.setName("ROLE_ADMIN");
+        userRoles.add(userRole);*/
         appUser = new AppUser();
         appUser.setName("admin2");
         appUser.setPassword(getPasswordEncoder().encode("admin2"));
-        userRoles = StreamSupport.stream(userRolesAll.spliterator(), true)
+/*        userRoles = StreamSupport.stream(userRolesAll.spliterator(), true)
                 .filter(e -> e.getName().matches("^(ROLE_ADMIN|ROLE_USER)$"))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
         appUser.setUserRoles(userRoles);
         appUserRepository.save(appUser);
     }

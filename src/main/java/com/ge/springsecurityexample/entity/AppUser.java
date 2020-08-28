@@ -1,11 +1,10 @@
 package com.ge.springsecurityexample.entity;
 
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Component
+
 @Table(name = "app_user")
 @Entity
 public class AppUser {
@@ -18,6 +17,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     private String password;

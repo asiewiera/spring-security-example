@@ -7,6 +7,7 @@ import com.ge.springsecurityexample.repository.AppUserRepository;
 import com.ge.springsecurityexample.repository.UserRoleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -22,11 +23,17 @@ public class AppUserServiceImpl implements AppUserService {
 
 
     public AppUserDto findByName(String username) {
-        AppUser appUser = appUserRepository.findByName(username);
+        List<AppUser> appUsers = appUserRepository.findAppUserDtoByName2(username);
+        AppUser appUser = appUsers.get(0);
+
+
+        //AppUserDto appUserDto = appUserRepository.findAppUserDtoByName(username);
+/*        AppUser appUser = appUserRepository.findByName(username);
         Set<UserRole> userRoles = userRoleRepository.findByAppUsers(appUser);
         AppUserDto appUserDto = new AppUserDto(appUser);
-        appUserDto.setUserRoles(userRoles);
-        return appUserDto;
+        appUserDto.setUserRoles(userRoles);*/
+        return new AppUserDto(appUser);
+        //return appUserDto;
     }
 
 
